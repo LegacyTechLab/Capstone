@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const supplierSchema = new mongoose.Schema({
     email : {
         type : String,
         unique : true,
@@ -34,6 +34,9 @@ const userSchema = new mongoose.Schema({
         enum : ["Homeowner", "Contractor","Supplier"],
         required : true
     },
+    businessAddress : {
+        type : String
+    },
     createdAt : {
         type : Date,
         default: Date.now()
@@ -43,4 +46,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-module.exports = userSchema;
+
+module.exports = mongoose.model("Supplier", supplierSchema);
+

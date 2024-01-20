@@ -1,4 +1,6 @@
-const product = new mongoose.Schema({
+const mongoose = require("mongoose");
+
+const productSchema = new mongoose.Schema({
     name : {
         type : String,
         required : true
@@ -25,7 +27,13 @@ const product = new mongoose.Schema({
     },
     status : {
         type : String,
-        enum : [],
+        enum : ["Available", "Out of stock"],
         required : true
+    },
+    supplier : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Supplier"
     }
 });
+
+module.exports = mongoose.model("Product", productSchema);

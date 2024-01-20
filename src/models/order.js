@@ -1,42 +1,24 @@
-const supplierSchema = new mongoose.Schema({
-    email : {
-        type : String
-    },
-    phoneNumber : {
-        type : String
-    }
-});
-
-const homeOwnerSchema = new mongoose.Schema({
-    email : {
-        type : String
-    },
-    phoneNumber : {
-        type : String
-    }
-});
-
-const productSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        required : true
-    },
-    unitPrice: {
-        type : Number,
-        required : true
-    }
-});
+const mongoose = require("mongoose");
 
 
 const orderSchema = new mongoose.Schema({
     supplier : {
-        type : supplierSchema
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Supplier"
     },
-    homeOwner : {
-        type : homeOwnerSchema
+    homeowner : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Homeowner"
     },
-    product : {
-        type : productSchema
+    products :[
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : "Product"
+        },  
+    ],
+    totalPrice : {
+        type : Number,
+        required : true
     },
     additionalCosts:[
         {
@@ -49,3 +31,5 @@ const orderSchema = new mongoose.Schema({
         enum : ["Pending", "Accepted", "Delivered"]
     }
 });
+
+module.exports = mongoose.model("Order", orderSchema);

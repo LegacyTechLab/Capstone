@@ -1,29 +1,13 @@
 const mongoose= require("mongoose");
 
-
-const contractorSchema = new mongoose.Schema({
-    email : {
-        type : String
-    },
-    phoneNumber : {
-        type : String
-    }
-});
-
-const projectSchema = new mongoose.Schema({
-    name : {
-        type : String
-    }
-});
-
 const quoteSchema = new mongoose.Schema({
     contractor : {
-        type : contractorSchema,
-        required : true
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Contractor"
     },
     project : {
-        type : projectSchema,
-        required : true
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Project"
     },
     amount : {
         type : Number,
@@ -34,8 +18,22 @@ const quoteSchema = new mongoose.Schema({
         enum : ["Accepted", "Pending", "Rejected"],
         default : "Pending"
     },
+    dateAvailable : {
+        type : Date
+    },
+    priorExperience : {
+        type : Boolean
+    },
+    paymentTerms : {
+        type : String
+    },
     createdAt : {
         type : Date,
-        default : Date.now()
+        default: Date.now()
+    },
+    updatedAt : {
+        type : Date
     }
 });
+
+module.exports = mongoose.model("Quote", quoteSchema);
