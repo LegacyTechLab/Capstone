@@ -35,7 +35,8 @@ const supplierSchema = new mongoose.Schema({
         required : true
     },
     businessAddress : {
-        type : String
+        type : String,
+        required : true
     },
     createdAt : {
         type : Date,

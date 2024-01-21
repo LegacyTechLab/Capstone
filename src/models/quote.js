@@ -24,6 +24,9 @@ const quoteSchema = new mongoose.Schema({
     priorExperience : {
         type : Boolean
     },
+    detailsOfPriorExperience : {
+        type : String
+    },
     paymentTerms : {
         type : String
     },
